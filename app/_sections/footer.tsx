@@ -79,12 +79,12 @@ const socials = [
   {
     id: "1",
     icon: instagramIcon,
-    slug: "https://www.instagram.com/bralewoodinvestments/",
+    slug: "https://www.instagram.com/",
   },
   {
     id: "2",
     icon: facebookIcon,
-    slug: "https://www.linkedin.com/company/bralewood-investment-limited/",
+    slug: "https://www.facebook.com/",
   },
 ];
 const footerLinks: FooterLink[] = [

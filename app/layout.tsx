@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
 export const metadata: Metadata = {
-  title: "DOAK - Your Source for a Variety of Drinks",
+  title: "Relocate and Care for Your Beloved Pets | Move My Pet Nigeria",
   description:
-    "Explore a wide range of drinks at DOAK. Buy your favorite beverages online.",
-  keywords: "DOAK drinks, buy drinks online, variety of drinks",
+    "Discover top-notch pet relocation, treatment, and care services at Move My Pet Nigeria. We prioritize your pet's safety and well-being throughout the relocation process.",
+  keywords:
+    "pet relocation, pet treatment, pet care, animal relocation, pet transport, pet services",
 };
 
 export default function RootLayout({

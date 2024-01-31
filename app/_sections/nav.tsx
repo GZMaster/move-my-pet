@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function Header({ navLinks = links }: HeaderProps) {
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-b-muted bg-background">
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-[#00000033] bg-background">
       <nav className="container mx-auto  flex w-full items-center justify-between bg-background px-6 py-4">
         <a href="/">
           <Logo />
@@ -59,11 +59,11 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
     ${mobile ? "flex-col space-y-2 w-full " : "items-center gap-12"}
   `;
   const navListItemClassName = `
-    group relative
+    group relative hover:scale-105 transform transition-transform
     ${mobile ? "w-full overflow-x-visible text-right" : ""}
   `;
   const navListLinkClassName = mobile
-    ? "mx-4 text-black dark:text-white rounded-[20px]"
+    ? "mx-4 text- dark:text-white rounded-[20px]"
     : "";
 
   const closeMobileNavigation = () => setMobileNavigationOpened(false);
@@ -108,10 +108,7 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
               onClick={closeMobileNavigation}
             >
               {button ? (
-                <Button
-                  variant={"default"}
-                  className={`rounded-[20px] ${mobile && "mx-4"}`}
-                >
+                <Button variant={"default"} className={` ${mobile && "mx-4"}`}>
                   <a href={href}>{title}</a>
                 </Button>
               ) : (
@@ -135,8 +132,8 @@ function NavLink({ children, className, mobile, href }: NavLinkProps) {
   return (
     <a
       className={`
-        block whitespace-nowrap px-2 py-2 text-sm no-underline transition hover:font-bold hover:text-slate-900 dark:hover:text-slate-50
-        ${mobile ? "text-slate-900 dark:text-slate-50" : "text-slate-400"}
+        block whitespace-nowrap px-2 py-2 text-base no-underline transition 
+        ${mobile && ""}
         ${className}
       `}
       href={href}

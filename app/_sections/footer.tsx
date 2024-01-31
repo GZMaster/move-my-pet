@@ -1,51 +1,42 @@
 import Image from "next/image";
 import React from "react";
-import logo from "@/assets/images/logo.jpg";
 import Link from "next/link";
-import { InstagramLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
+import {
+  facebookIcon,
+  instagramIcon,
+  mailIcon,
+  mapPinIcon,
+  moveIcon,
+  phoneIcon,
+} from "@/components/icons";
 export default function Footer() {
-  const socials = [
-    {
-      id: "1",
-      icon: <InstagramLogoIcon className="text-orange-500" />,
-      slug: "https://www.instagram.com/bralewoodinvestments/",
-    },
-    {
-      id: "1",
-      icon: <LinkedInLogoIcon className="text-orange-500" />,
-      slug: "https://www.linkedin.com/company/bralewood-investment-limited/",
-    },
-  ];
   return (
-    <footer className="w-full bg-black">
-      <div className="flex flex-col gap-16  pt-14 text-white">
+    <footer className="w-full bg-white">
+      <div className="flex flex-col gap-16  pt-14 ">
         <div className="container flex flex-col items-center justify-between max-md:items-start max-md:gap-4 md:flex-row">
-          <div className="flex flex-col items-center gap-5">
-            <img
-              src="/images/footer-logo.png"
-              alt="logo"
-              width={135}
-              height={135}
-              className="rounded-[22px]"
-            />
+          <div className="flex flex-col gap-5 max-w-[275px]">
+            <Image src="/assets/logo.png" alt="logo" width={135} height={135} />
+            <p className="text-sm">
+              Paws in Transit, Nurturing Happy Journeys for Your Furry Friends.
+            </p>
             <div className="flex items-center gap-4">
               {socials.map((s) => (
                 <Link
                   key={s.id}
                   href={s.slug}
                   target="_blank"
-                  className="rounded-[10px] bg-orange-500 bg-opacity-20 p-[5px]"
+                  className="rounded-[5px] bg-primary p-[10px]"
                 >
-                  {s.icon}
+                  <Image src={s.icon} alt="icon" width={24} height={24} />
                 </Link>
               ))}
             </div>
           </div>
 
-          {/* <div className="flex gap-6 max-md:flex-col lg:gap-12">
+          <div className="flex gap-6 max-md:flex-col lg:gap-12 max-md:mt-4">
             {footerLinks.map((column) => (
               <div key={column.column} className="flex-1">
-                <h2 className="mb-4 font-mcqueen text-base font-bold capitalize text-white">
+                <h2 className="mb-4 font-heading text-base font-bold capitalize ">
                   {column.data.leadText}
                 </h2>
                 <ul>
@@ -53,8 +44,16 @@ export default function Footer() {
                     <li key={index} className="mb-4">
                       <Link
                         href={item.slug}
-                        className="text-sm font-medium leading-[28px] text-white opacity-70 hover:underline"
+                        className="text-sm font-medium leading-[28px] flex gap-4 "
                       >
+                        {item.icon && (
+                          <Image
+                            src={item.icon}
+                            alt="icon"
+                            width={24}
+                            height={24}
+                          />
+                        )}
                         {item.title}
                       </Link>
                     </li>
@@ -62,32 +61,77 @@ export default function Footer() {
                 </ul>
               </div>
             ))}
-            <div className="flex w-full flex-col gap-8 sm:w-[240px]">
-              <div className="flex flex-col gap-[18px]">
-                <h2 className="font-mcqueen font-bold">
-                  Sign up to our Newsletter
-                </h2>
-                <Input
-                  placeholder="Enter Email Address"
-                  className="rounded-[12px] border border-white border-opacity-20 bg-white bg-opacity-[15]"
-                />
-              </div>
-              <div className="flex flex-col gap-[18px]">
-                <h2 className="font-mcqueen font-bold">Address</h2>
-                <p className="text-sm font-light">
-                  7th floor CBC Towers, No 11 Olubunmi Owa Street, Lekki Phase
-                  1, Lagos
-                </p>
-              </div>
-            </div>
-          </div> */}
+          </div>
         </div>
-        <div className="border-t border-white border-opacity-20">
-          <p className="container py-6">
-            Copyright © 2023 Bralewood Investments. All rights reserved.
-          </p>
+        <div className="border-t border-white border-opacity-20 bg-black">
+          <div className="container py-6 flex flex-col text-white text-sm">
+            <p>Copyright © 2024 movemypetNigeria. All rights reserved.</p>
+            <p>
+              Designed by <strong>Retro Developers</strong>.
+            </p>
+          </div>
         </div>
       </div>
     </footer>
   );
+}
+const socials = [
+  {
+    id: "1",
+    icon: instagramIcon,
+    slug: "https://www.instagram.com/bralewoodinvestments/",
+  },
+  {
+    id: "2",
+    icon: facebookIcon,
+    slug: "https://www.linkedin.com/company/bralewood-investment-limited/",
+  },
+];
+const footerLinks: FooterLink[] = [
+  {
+    column: 1,
+    data: {
+      leadText: "Company",
+      items: [
+        { title: "Services", slug: "#" },
+        {
+          title: "Locate us",
+          slug: "#",
+        },
+        { title: "Testimonials", slug: "#" },
+        { title: "Gallery", slug: "#" },
+      ],
+    },
+  },
+  {
+    column: 2,
+    data: {
+      leadText: "Contact us",
+      items: [
+        { title: "Pet import/export quote", slug: "#", icon: moveIcon },
+        { title: "movemypetnigeria@gmail.com", slug: "#", icon: mailIcon },
+        { title: "+234 8180281937", slug: "#", icon: phoneIcon },
+        {
+          title: "Muritala Muhammed International Airport Lagos",
+          slug: "#",
+          icon: mapPinIcon,
+        },
+      ],
+    },
+  },
+];
+interface FooterItem {
+  title: string;
+  slug: string;
+  icon?: string;
+}
+
+interface FooterColumn {
+  leadText: string;
+  items: FooterItem[];
+}
+
+interface FooterLink {
+  column: number;
+  data: FooterColumn;
 }

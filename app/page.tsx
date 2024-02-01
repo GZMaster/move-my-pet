@@ -4,6 +4,7 @@ import Hero from "./_sections/hero";
 import { Header } from "./_sections/nav";
 import Options from "./_sections/options";
 import Services from "./_sections/services";
+import Testimonial from "./_sections/testimonial";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <Hero />
         <Services />
         <Options />
+        <Testimonial />
         <GetQuote />
       </main>
       <Footer />

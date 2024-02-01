@@ -13,25 +13,27 @@ export default function Options() {
           Why we are your best option
         </h2>
       </div>
-      <div className="flex flex-col md:flex-row max-md:gap-10 justify-between w-full">
-        <div className="flex flex-col justify-between max-md:gap-10 max-md:items-center">
-          {optionsA.map((option, idx) => (
-            <Card
-              key={idx}
-              text={option.text}
-              title={option.title}
-              icon={option.icon}
-            />
-          ))}
+      <div className="flex flex-col lg:flex-row max-lg:gap-10 lg:gap-12 justify-between w-full">
+        <div className="flex flex-col max-lg:gap-10 sm:flex-row justify-between item-center lg:w-2/3">
+          <div className="flex flex-col justify-between lg:justify-between sm:justify-center max-lg:gap-10 max-lg:items-center">
+            {optionsA.map((option, idx) => (
+              <Card
+                key={idx}
+                text={option.text}
+                title={option.title}
+                icon={option.icon}
+              />
+            ))}
+          </div>
+          <Image
+            src={img}
+            alt="options"
+            width={360}
+            height={540}
+            className="rounded-[30px]"
+          />
         </div>
-        <Image
-          src={img}
-          alt="options"
-          width={360}
-          height={540}
-          className="rounded-[30px]"
-        />
-        <div className="flex flex-col justify-between max-md:gap-10 max-md:items-center">
+        <div className="flex flex-col sm:flex-row lg:flex-col justify-between max-lg:gap-10 max-lg:items-center lg:w-1/3 lg:items-end">
           {optionsB.map((option, idx) => (
             <Card
               key={idx}

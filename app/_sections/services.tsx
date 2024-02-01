@@ -17,7 +17,7 @@ export default function Services() {
             safety of your beloved pets.
           </p>
         </div>
-        <div className="w-[700px]">
+        <div className="w-full lg:w-[700px]">
           <ServiceCarouselComponent />
         </div>
       </div>

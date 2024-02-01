@@ -22,7 +22,7 @@ export function ServiceCarouselComponent() {
     <Carousel plugins={[plugin.current]} className="w-full">
       <CarouselContent>
         {ServicesData.map((data) => (
-          <CarouselItem key={data.id} className=" sm:basis-1/2 lg:basis-1/3">
+          <CarouselItem key={data.id} className=" sm:basis-1/3">
             <ServiceCard
               id={data.id}
               title={data.title}

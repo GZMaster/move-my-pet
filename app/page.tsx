@@ -1,3 +1,4 @@
+import FindUs from "./_sections/find-us";
 import Footer from "./_sections/footer";
 import GetQuote from "./_sections/get-quote";
 import Hero from "./_sections/hero";
@@ -14,7 +15,9 @@ export default function Home() {
         <Hero />
         <Services />
         <Options />
+        <FindUs />
         <Testimonial />
+
         <GetQuote />
       </main>
       <Footer />

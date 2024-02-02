@@ -1,6 +1,7 @@
 import Image from "next/image";
 import bg from "@/assets/hero.png";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 export default function Hero() {
   return (
     <section className="container pt-10 flex flex-col items-center justify-center">
@@ -12,7 +13,9 @@ export default function Hero() {
           We offer a world of worry-free pet travel with our dedicated services.
           Your pets feel at home wherever they go.
         </p>
-        <Button size={"lg"}>Get Quote</Button>
+        <Button size={"lg"} asChild>
+          <Link href="/contact-us">Get Quote</Link>
+        </Button>
       </div>
       <Image src={bg} priority className="w-full " alt="hero" />
     </section>

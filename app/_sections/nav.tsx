@@ -21,7 +21,6 @@ export function Header({ navLinks = links }: HeaderProps) {
 function Logo() {
   return <img src="/assets/logo.png" width={75} height={50} alt="logo" />;
 }
-
 const links: NavLink[] = [
   {
     title: "Our Services",
@@ -37,7 +36,7 @@ const links: NavLink[] = [
   },
   {
     title: "Get Quote",
-    href: "#quote",
+    href: "/contact-us",
     button: true,
   },
 ];
@@ -143,7 +142,7 @@ function NavLink({ children, className, mobile, href }: NavLinkProps) {
   );
 }
 
-interface NavLink {
+export interface NavLink {
   title: string;
   href: string;
   children?: NavLink[];

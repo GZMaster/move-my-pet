@@ -2,9 +2,10 @@ import Image from "next/image";
 import map from "@/assets/map-bg.png";
 import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "@radix-ui/react-icons";
+import Link from "next/link";
 export default function FindUs() {
   return (
-    <section className="bg-black w-full py-20">
+    <section className="bg-black w-full py-20 scroll-m-20" id="locate">
       <div className="container flex justify-between max-lg:gap-5 flex-col md:flex-row items-center ">
         <div className="flex flex-col gap-10 sm:w-1/2">
           <div className="max-w-[490px] flex flex-col">
@@ -33,8 +34,11 @@ export default function FindUs() {
             variant={"outline"}
             className="border-green-500 text-green-500 gap-4 hover:text-green-500/80 hover:bg-green-100 bg-transparent w-fit"
             size={"lg"}
+            asChild
           >
-            Send us a message <ArrowRightIcon className="text-green-500" />
+            <Link href="/contact-us">
+              Send us a message <ArrowRightIcon className="text-green-500" />
+            </Link>
           </Button>
         </div>
         <Image

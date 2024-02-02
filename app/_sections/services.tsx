@@ -2,7 +2,10 @@ import { ServiceCarouselComponent } from "../_components/service-carousel";
 
 export default function Services() {
   return (
-    <section className="w-full bg-secondary pt-24 pb-12">
+    <section
+      className="w-full bg-secondary pt-24 pb-12 scroll-m-20"
+      id="services"
+    >
       <div className="container flex flex-col lg:flex-row justify-between  gap-20">
         <div className="max-w-[400px] flex flex-col">
           <h6 className="text-[#FFFFFFB2] text-[12px] tracking-[2.16px]">

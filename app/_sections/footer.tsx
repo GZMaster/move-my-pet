@@ -25,6 +25,7 @@ export default function Footer() {
                   key={s.id}
                   href={s.slug}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-[5px] bg-primary p-[10px]"
                 >
                   <Image src={s.icon} alt="icon" width={24} height={24} />
@@ -44,6 +45,7 @@ export default function Footer() {
                     <li key={index} className="mb-4">
                       <Link
                         href={item.slug}
+                        target={item.new_page ? "_blank" : "_self"}
                         className="text-sm font-medium leading-[28px] flex gap-4 "
                       >
                         {item.icon && (
@@ -93,13 +95,13 @@ const footerLinks: FooterLink[] = [
     data: {
       leadText: "Company",
       items: [
-        { title: "Services", slug: "#" },
+        { title: "Services", slug: "/#services" },
         {
           title: "Locate us",
-          slug: "#",
+          slug: "/#locate",
         },
-        { title: "Testimonials", slug: "#" },
-        { title: "Gallery", slug: "#" },
+        { title: "Testimonials", slug: "/#testimonial" },
+        { title: "Gallery", slug: "/gallery" },
       ],
     },
   },
@@ -109,12 +111,21 @@ const footerLinks: FooterLink[] = [
       leadText: "Contact us",
       items: [
         { title: "Pet import/export quote", slug: "#", icon: moveIcon },
-        { title: "movemypetnigeria@gmail.com", slug: "#", icon: mailIcon },
-        { title: "+234 8180281937", slug: "#", icon: phoneIcon },
+        {
+          title: "movemypetnigeria@gmail.com",
+          slug: "mailto:movemypetnigeria@gmail.com",
+          icon: mailIcon,
+        },
+        {
+          title: "+234 8180281937",
+          slug: "tel:+2348180281937",
+          icon: phoneIcon,
+        },
         {
           title: "Muritala Muhammed International Airport Lagos",
-          slug: "#",
+          slug: "https://maps.app.goo.gl/B126UEBsCoeyvk2D9",
           icon: mapPinIcon,
+          new_page: true,
         },
       ],
     },
@@ -124,6 +135,7 @@ interface FooterItem {
   title: string;
   slug: string;
   icon?: string;
+  new_page?: boolean;
 }
 
 interface FooterColumn {

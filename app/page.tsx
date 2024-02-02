@@ -17,7 +17,6 @@ export default function Home() {
         <Options />
         <FindUs />
         <Testimonial />
-
         <GetQuote />
       </main>
       <Footer />

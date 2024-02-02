@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function GetQuote() {
   return (
@@ -9,7 +10,9 @@ export default function GetQuote() {
             Do you need help moving your pet?
           </h2>
           <p>Contact us for a quick and easy solution.</p>
-          <Button className="w-fit">Get Quote</Button>
+          <Button className="w-fit" asChild>
+            <Link href="/contact-us">Get Quote</Link>
+          </Button>
         </div>
       </div>
       <div className=" w-full relative h-full">

@@ -17,7 +17,7 @@ export default function Hero() {
           <Link href="/contact-us">Get Quote</Link>
         </Button>
       </div>
-      <Image src={bg} priority className="w-full " alt="hero" />
+      <Image src={bg} priority className="w-full max-md:mt-12 " alt="hero" />
     </section>
   );
 }

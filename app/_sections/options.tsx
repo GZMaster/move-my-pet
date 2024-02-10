@@ -4,7 +4,7 @@ import img from "@/assets/feature-bg.png";
 
 export default function Options() {
   return (
-    <section className="flex container flex-col items-center py-10 md:py-20 gap-20 w-full">
+    <section className="flex container flex-col items-center py-20 gap-20 w-full">
       <div className="max-w-[400px] flex flex-col items-center">
         <h6 className="text-[#828282] text-[12px] tracking-[2.16px]">
           YOUR TRUSTED PARTNER IN PET RELOCATION

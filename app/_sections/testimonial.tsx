@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Testimonial() {
   return (
     <section
-      className="flex container flex-col items-center py-10 md:py-20 gap-20 w-full scroll-m-20"
+      className="flex container flex-col items-center py-20 gap-20 w-full scroll-m-20"
       id="testimonial"
     >
       <div className="max-w-[480px] flex flex-col items-center">

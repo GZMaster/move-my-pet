@@ -2,7 +2,7 @@ import Gallery from "./gallery";
 
 export default function page() {
   return (
-    <section className="container flex flex-col items-center gap-10 py-10 md:py-20 ">
+    <section className="container flex flex-col items-center gap-10 py-20 ">
       <div className="max-w-[480px] flex flex-col items-center">
         <h2 className="text-[#141414] font-bold font-heading text-center text-3xl lg:text-[40px] lg:leading-[56px]">
           Our gallery of pet relocations

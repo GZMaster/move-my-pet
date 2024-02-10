@@ -37,12 +37,12 @@ export default function Footer() {
           <div className="flex gap-6 max-md:flex-col lg:gap-12 max-md:mt-4">
             {footerLinks.map((column) => (
               <div key={column.column} className="flex-1">
-                <h2 className="mb-4 font-heading text-base font-bold capitalize ">
+                <h2 className="mb-4  text-base font-bold capitalize ">
                   {column.data.leadText}
                 </h2>
                 <ul>
                   {column.data.items.map((item, index) => (
-                    <li key={index} className="mb-4">
+                    <li key={index} className="mb-4 opacity-70">
                       <Link
                         href={item.slug}
                         target={item.new_page ? "_blank" : "_self"}
@@ -54,6 +54,7 @@ export default function Footer() {
                             alt="icon"
                             width={24}
                             height={24}
+                            className="opacity-100"
                           />
                         )}
                         {item.title}
@@ -112,13 +113,13 @@ const footerLinks: FooterLink[] = [
       items: [
         { title: "Pet import/export quote", slug: "#", icon: moveIcon },
         {
-          title: "movemypetnigeria@gmail.com",
-          slug: "mailto:movemypetnigeria@gmail.com",
+          title: "info@movemypetng.com",
+          slug: "mailto:info@movemypetng.com",
           icon: mailIcon,
         },
         {
-          title: "+234 8180281937",
-          slug: "tel:+2348180281937",
+          title: "+234 8184739642",
+          slug: "tel:+2348184739642",
           icon: phoneIcon,
         },
         {

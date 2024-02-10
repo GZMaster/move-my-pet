@@ -5,24 +5,35 @@ import * as z from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const formSchema = z.object({
-  first_name: z.string().min(5, {
-    message: "Name must be at least 5 characters.",
-  }),
-  last_name: z.string().min(5, {
-    message: "Name must be at least 5 characters.",
-  }),
+  pet_specie: z.string(),
+  pet_breed: z.string(),
+  pet_sex: z.string(),
+  pet_weight: z.string(),
+  dimensions: z.string(),
+  first_name: z.string(),
+  last_name: z.string(),
   Phone: z.string().min(11, {
     message: "Phone Number must be 11 digits",
   }),
@@ -32,9 +43,7 @@ const formSchema = z.object({
       message: "Email must be valid",
     })
     .email("This is not a valid email"),
-  message: z.string().min(5, {
-    message: "Message must be at least 5 characters.",
-  }),
+  message: z.string(),
 });
 
 export function ContactForm() {
@@ -57,6 +66,93 @@ export function ContactForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col gap-4 border-2 border-black/20  p-4 shadow sm:w-2/3 md:gap-6 md:p-8 lg:w-[500px]"
       >
+        <FormField
+          control={form.control}
+          name="pet_specie"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pet Specie</FormLabel>
+              <FormControl>
+                <Input placeholder="eg. dog, cat, bird, rabbit" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pet_breed"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pet Breed</FormLabel>
+              <FormControl>
+                <Input placeholder="Type in the breed of your pet" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pet_sex"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pet Sex</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your pets sex" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="male">Male</SelectItem>
+                  <SelectItem value="female">Female</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pet_breed"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Pet Weight(in kg)</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Type in the weight of your pet"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="pet_breed"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Dimensions of the pet crate</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="Length, Width, Height of pet crate"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription className="flex justify-end w-full">
+                <Link
+                  href={"/contact-us#guide"}
+                  className="underline text-[#0080FF]"
+                >
+                  Need help with this?
+                </Link>
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="first_name"

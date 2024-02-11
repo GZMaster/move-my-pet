@@ -13,6 +13,7 @@ import phoneIcon from "@/assets/icons/phone.svg";
 import timeIcon from "@/assets/icons/time.svg";
 import userIcon from "@/assets/icons/user.svg";
 import vaccineIcon from "@/assets/icons/vaccine.svg";
+import flightIcon from "@/assets/icons/flight.svg";
 
 export {
   adoptedIcon,
@@ -30,4 +31,5 @@ export {
   pawIcon,
   moveIcon,
   vaccineIcon,
+  flightIcon,
 };

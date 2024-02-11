@@ -35,7 +35,7 @@ export function ServiceCarouselComponent() {
     </Carousel>
   );
 }
-const ServicesData = [
+export const ServicesData = [
   {
     id: 1,
     title: "Local and International Pet Travel",

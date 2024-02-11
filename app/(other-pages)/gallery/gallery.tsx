@@ -36,7 +36,7 @@ const Gallery = ({ media }: IProps) => {
 
   return (
     <div className="flex flex-col items-center gap-10 w-full">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-4 items-center w-full">
         {displayedMedia.map((media, index) => (
           <div
             className="flex flex-col gap-3 items-center max-w-[440px] max-h-[480px]"

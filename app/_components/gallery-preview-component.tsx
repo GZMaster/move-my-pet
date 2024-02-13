@@ -1,17 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { media } from "../(other-pages)/gallery/page";
 import ReactCountryFlag from "react-country-flag";
 import Image from "next/image";
 import { flightIcon } from "@/components/icons";
-import { countries } from "../(other-pages)/gallery/countryCode";
+import { countries } from "@/lib/countryCode";
 
 export default function GalleryPreviewComponent() {
   let initialCount = 3;
-  const [displayedMedia, setDisplayedMedia] = useState(
-    media.slice(0, initialCount)
-  );
+  const [displayedMedia] = useState(media.slice(0, initialCount));
   const getCountryName = (countryCode: string) => {
     return countries[countryCode] || "Unknown";
   };
@@ -53,3 +50,31 @@ export default function GalleryPreviewComponent() {
     </div>
   );
 }
+
+export interface IMedia {
+  url: string;
+  type: "image" | "video";
+  countries: string[];
+}
+export const media: IMedia[] = [
+  {
+    type: "image",
+    countries: ["GB", "NG"],
+    url: "/assets/gallery/1.jpg",
+  },
+  {
+    type: "image",
+    countries: ["NG", "GB"],
+    url: "/assets/gallery/2.jpg",
+  },
+  {
+    type: "image",
+    countries: ["NG", "IT"],
+    url: "/assets/gallery/3.jpg",
+  },
+  {
+    type: "image",
+    countries: ["NG", "ZA"],
+    url: "/assets/gallery/4.jpg",
+  },
+];

@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { IMedia } from "./page";
 import ReactCountryFlag from "react-country-flag";
 import { flightIcon } from "@/components/icons";
-import { countries } from "./countryCode";
+import { countries } from "@/lib/countryCode";
 
 interface IProps {
   media: IMedia[];

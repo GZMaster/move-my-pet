@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import emailjs from "@emailjs/browser";
 import {
   Form,
   FormControl,
@@ -25,6 +26,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast, useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   pet_specie: z.string(),
@@ -47,9 +50,17 @@ const formSchema = z.object({
 });
 
 export function ContactForm() {
+  const [loading, setLoading] = useState(false);
+  useEffect(() => emailjs.init("abd7sfjbffyKSFQl6"), []);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      pet_specie: "",
+      pet_breed: "",
+      pet_sex: "",
+      pet_weight: "",
+      dimensions: "",
       first_name: "",
       last_name: "",
       Phone: "",
@@ -58,7 +69,41 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {}
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const serviceId = "service_28o7sr6";
+    const templateId = "template_44ek3pa";
+    setLoading(true);
+    emailjs
+      .send(serviceId, templateId, {
+        pet_specie: values.pet_specie,
+        pet_breed: values.pet_breed,
+        pet_sex: values.pet_sex,
+        pet_weight: values.pet_weight,
+        dimensions: values.dimensions,
+        first_name: values.first_name,
+        last_name: values.last_name,
+        phone: values.Phone,
+        email: values.email,
+        message: values.message,
+      })
+      .then((response) => {
+        console.log(response);
+        toast({
+          title: "Request Successfully Sent",
+          description: "Our Team will get back to you shortly",
+        });
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        toast({
+          title: "Something went wrong",
+          description: "Email Unsuccessful",
+          variant: "destructive",
+        });
+        setLoading(false);
+      });
+  }
 
   return (
     <Form {...form}>
@@ -115,7 +160,7 @@ export function ContactForm() {
         />
         <FormField
           control={form.control}
-          name="pet_breed"
+          name="pet_weight"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Pet Weight(in kg)</FormLabel>
@@ -131,7 +176,7 @@ export function ContactForm() {
         />
         <FormField
           control={form.control}
-          name="pet_breed"
+          name="dimensions"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Dimensions of the pet crate</FormLabel>
@@ -224,6 +269,7 @@ export function ContactForm() {
           className="mt-6 w-fit"
           size={"lg"}
           type="submit"
+          disabled={loading}
         >
           Submit
         </Button>

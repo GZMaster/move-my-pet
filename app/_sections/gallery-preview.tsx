@@ -10,7 +10,7 @@ export default function GalleryPreview() {
         <h6 className="text-[#828282] text-[12px] tracking-[2.16px] uppercase">
           our gallery
         </h6>
-        <h2 className="text-[#141414] font-bold font-heading text-center text-[40px] leading-[56px]">
+        <h2 className="text-[#141414] font-bold   font-heading text-center text-[40px] leading-[56px]">
           Meet our happy travelers
         </h2>
         <p className="pt-4 text-center">

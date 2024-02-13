@@ -18,7 +18,7 @@ export interface IMedia {
   type: "image" | "video";
   countries: string[];
 }
-export const media: IMedia[] = [
+const media: IMedia[] = [
   {
     type: "image",
     countries: ["GB", "NG"],

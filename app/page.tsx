@@ -1,5 +1,6 @@
 import FindUs from "./_sections/find-us";
 import Footer from "./_sections/footer";
+import GalleryPreview from "./_sections/gallery-preview";
 import GetQuote from "./_sections/get-quote";
 import Hero from "./_sections/hero";
 import { Header } from "./_sections/nav";
@@ -17,6 +18,7 @@ export default function Home() {
         <Options />
         <FindUs />
         <Testimonial />
+        <GalleryPreview />
         <GetQuote />
       </main>
       <Footer />

@@ -1,8 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { TestimonialCarouselComponent } from "../_components/testimonial-carousel";
-import { ArrowRightIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-
 export default function Testimonial() {
   return (
     <section
@@ -20,16 +16,6 @@ export default function Testimonial() {
       <div className="w-full md:w-3/4 lg:w-1/2">
         <TestimonialCarouselComponent />
       </div>
-      <Button
-        variant={"outline"}
-        className="border-green-500 text-green-500 gap-4 hover:text-green-500/80 hover:bg-green-100"
-        size={"lg"}
-        asChild
-      >
-        <Link href="/gallery">
-          View our pet gallery <ArrowRightIcon className="text-green-500" />
-        </Link>
-      </Button>
     </section>
   );
 }

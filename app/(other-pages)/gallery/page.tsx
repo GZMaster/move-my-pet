@@ -13,7 +13,7 @@ export default function page() {
   );
 }
 
-interface IMedia {
+export interface IMedia {
   url: string;
   type: "image" | "video";
   countries: string[];

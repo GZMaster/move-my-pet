@@ -51,12 +51,12 @@ export default function GalleryPreviewComponent() {
   );
 }
 
-export interface IMedia {
+interface IMedia {
   url: string;
   type: "image" | "video";
   countries: string[];
 }
-export const media: IMedia[] = [
+const media: IMedia[] = [
   {
     type: "image",
     countries: ["GB", "NG"],

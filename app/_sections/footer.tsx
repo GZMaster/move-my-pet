@@ -9,6 +9,7 @@ import {
   moveIcon,
   phoneIcon,
 } from "@/components/icons";
+import { LaptopIcon } from "@radix-ui/react-icons";
 export default function Footer() {
   return (
     <footer className="w-full bg-white">
@@ -82,12 +83,17 @@ const socials = [
   {
     id: "1",
     icon: instagramIcon,
-    slug: "https://www.instagram.com/",
+    slug: "https://www.instagram.com/movemypetnigeria?igsh=MXVndHJ6bzcyeWZ4dA==",
   },
   {
     id: "2",
     icon: facebookIcon,
-    slug: "https://www.facebook.com/",
+    slug: "https://www.facebook.com/movemypetnigeria",
+  },
+  {
+    id: "3",
+    icon: phoneIcon,
+    slug: "https://wa.me/+2348184739642",
   },
 ];
 const footerLinks: FooterLink[] = [

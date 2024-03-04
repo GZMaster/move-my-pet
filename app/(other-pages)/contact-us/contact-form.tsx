@@ -19,22 +19,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { toast, useToast } from "@/components/ui/use-toast";
-
+import { toast } from "@/components/ui/use-toast";
+import { countriesName } from "@/lib/countries";
 const formSchema = z.object({
   pet_specie: z.string(),
   pet_breed: z.string(),
   pet_sex: z.string(),
   pet_weight: z.string(),
-  dimensions: z.string(),
+  crate_length: z.string().refine(
+    (value) => {
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      return regex.test(value);
+    },
+    {
+      message: "Length must be between 0-250cm",
+    }
+  ),
+  crate_width: z.string().refine(
+    (value) => {
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      return regex.test(value);
+    },
+    {
+      message: "Width must be between 0-250cm",
+    }
+  ),
+  crate_height: z.string().refine(
+    (value) => {
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      return regex.test(value);
+    },
+    {
+      message: "Height must be between 0-250cm",
+    }
+  ),
+  origin: z.string(),
+  destination: z.string(),
+
   first_name: z.string(),
   last_name: z.string(),
   Phone: z.string().min(11, {
@@ -60,7 +87,11 @@ export function ContactForm() {
       pet_breed: "",
       pet_sex: "",
       pet_weight: "",
-      dimensions: "",
+      crate_height: "",
+      crate_width: "",
+      crate_length: "",
+      origin: "",
+      destination: "",
       first_name: "",
       last_name: "",
       Phone: "",
@@ -79,7 +110,11 @@ export function ContactForm() {
         pet_breed: values.pet_breed,
         pet_sex: values.pet_sex,
         pet_weight: values.pet_weight,
-        dimensions: values.dimensions,
+        crate_height: values.crate_height,
+        crate_width: values.crate_width,
+        crate_length: values.crate_length,
+        origin: values.origin,
+        destination: values.destination,
         first_name: values.first_name,
         last_name: values.last_name,
         phone: values.Phone,
@@ -90,7 +125,7 @@ export function ContactForm() {
         console.log(response);
         toast({
           title: "Request Successfully Sent",
-          description: "Our Team will get back to you shortly",
+          description: "Our Team will respond to you shortly",
         });
         setLoading(false);
       })
@@ -111,6 +146,7 @@ export function ContactForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex w-full flex-col gap-4 border-2 border-black/20  p-4 shadow sm:w-2/3 md:gap-6 md:p-8 lg:w-[500px]"
       >
+        <h2 className="font-heading text-lg">Pet Information</h2>
         <FormField
           control={form.control}
           name="pet_specie"
@@ -174,30 +210,107 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="dimensions"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Dimensions of the pet crate</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Length, Width, Height of pet crate"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="flex justify-end w-full">
-                <Link
-                  href={"/contact-us#guide"}
-                  className="underline text-[#0080FF]"
+        <div className="flex items-baseline gap-3 ">
+          <FormField
+            control={form.control}
+            name="origin"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>From</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
                 >
-                  Need help with this?
-                </Link>
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your Airport" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="abuja">Abuja</SelectItem>
+                    <SelectItem value="lagos">Lagos</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="destination"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel>To</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Country" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {countriesName.map((country) => (
+                      <SelectItem key={country} value={country}>
+                        {country}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <div className="flex gap-3 items-baseline">
+          <FormField
+            control={form.control}
+            name="crate_length"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Crate Length</FormLabel>
+                <FormControl>
+                  <Input placeholder="0 - 250cm" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="crate_width"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Crate Width</FormLabel>
+                <FormControl>
+                  <Input placeholder="0 - 250cm" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="crate_height"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Crate Height</FormLabel>
+                <FormControl>
+                  <Input placeholder="0 - 250cm" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        <FormDescription className="flex justify-end w-full">
+          <Link href={"/contact-us#guide"} className="underline text-[#0080FF]">
+            Need help with this?
+          </Link>
+        </FormDescription>
+
+        <h2 className="font-heading text-lg">Contact Information</h2>
         <FormField
           control={form.control}
           name="first_name"

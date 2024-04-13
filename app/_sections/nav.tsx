@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
@@ -9,9 +9,9 @@ export function Header({ navLinks = links }: HeaderProps) {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-[#00000033] bg-background">
       <nav className="container mx-auto  flex w-full items-center justify-between bg-background px-6 py-4">
-        <a href="/">
+        <Link href="/">
           <Logo />
-        </a>
+        </Link>
         <Navigation navLinks={navLinks} />
         <Navigation mobile navLinks={navLinks} />
       </nav>

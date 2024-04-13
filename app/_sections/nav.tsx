@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { useState } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";

@@ -46,10 +46,10 @@ const Gallery = ({ media }: IProps) => {
               <img
                 src={media.url}
                 alt={`Media ${index + 1}`}
-                className="w-full h-full"
+                className="w-full h-[400px]"
               />
             ) : (
-              <video controls className="w-full h-full">
+              <video controls className="h-[400px]">
                 <source src={media.url} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>

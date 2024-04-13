@@ -34,29 +34,32 @@ const formSchema = z.object({
   pet_weight: z.string(),
   crate_length: z.string().refine(
     (value) => {
-      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?|250)$/
+
       return regex.test(value);
     },
     {
-      message: "Length must be between 0-250cm",
+      message: "Length must be between 0-250",
     }
   ),
   crate_width: z.string().refine(
     (value) => {
-      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?|250)$/
+
       return regex.test(value);
     },
     {
-      message: "Width must be between 0-250cm",
+      message: "Width must be between 0-250",
     }
   ),
   crate_height: z.string().refine(
     (value) => {
-      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?)cm$/;
+      const regex = /^(?:25[0-0]|2[0-4][0-9]|[01]?[0-9][0-9]?|250)$/
+
       return regex.test(value);
     },
     {
-      message: "Height must be between 0-250cm",
+      message: "Height must be between 0-250",
     }
   ),
   origin: z.string(),
@@ -144,7 +147,7 @@ export function ContactForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex w-full flex-col gap-4 border-2 border-black/20  p-4 shadow sm:w-2/3 md:gap-6 md:p-8 lg:w-[500px]"
+        className="flex w-full flex-col gap-4 border-2 border-black/20  p-4 shadow sm:w-2/3 md:gap-6 md:p-8 lg:w-[550px]"
       >
         <h2 className="font-heading text-lg">Pet Information</h2>
         <FormField
@@ -269,9 +272,9 @@ export function ContactForm() {
             name="crate_length"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Crate Length</FormLabel>
+                <FormLabel>Crate Length(cm)</FormLabel>
                 <FormControl>
-                  <Input placeholder="0 - 250cm" {...field} />
+                  <Input placeholder="0 - 250" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -282,9 +285,9 @@ export function ContactForm() {
             name="crate_width"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Crate Width</FormLabel>
+                <FormLabel>Crate Width(cm)</FormLabel>
                 <FormControl>
-                  <Input placeholder="0 - 250cm" {...field} />
+                  <Input placeholder="0 - 250" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -295,9 +298,9 @@ export function ContactForm() {
             name="crate_height"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Crate Height</FormLabel>
+                <FormLabel>Crate Height(cm)</FormLabel>
                 <FormControl>
-                  <Input placeholder="0 - 250cm" {...field} />
+                  <Input placeholder="0 - 250" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -384,8 +387,7 @@ export function ContactForm() {
           type="submit"
           disabled={loading}
         >
-          Submit
-        </Button>
+        {loading ? "Submitting..." :"Submit"}         </Button>
       </form>
     </Form>
   );

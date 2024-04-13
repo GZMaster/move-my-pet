@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Header({ navLinks = links }: HeaderProps) {
   return (
@@ -106,7 +107,7 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
             >
               {button ? (
                 <Button variant={"default"} className={` ${mobile && "mx-4"}`}>
-                  <a href={href}>{title}</a>
+                  <Link href={href}>{title}</Link>
                 </Button>
               ) : (
                 <NavLink
@@ -127,16 +128,16 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
 
 function NavLink({ children, className, mobile, href }: NavLinkProps) {
   return (
-    <a
+    <Link
+      href={href}
       className={`
         block whitespace-nowrap px-2 py-2 text-base no-underline transition 
         ${mobile && ""}
         ${className}
       `}
-      href={href}
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
@@ -153,6 +154,7 @@ interface NavigationProps {
 }
 
 interface NavLinkProps extends React.HTMLProps<HTMLLinkElement> {
+  href: string;
   mobile?: boolean;
 }
 

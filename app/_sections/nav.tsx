@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export function Header({ navLinks = links }: HeaderProps) {
   return (
@@ -45,12 +46,10 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
   const [mobileNavigationOpened, setMobileNavigationOpened] = useState(false);
 
   const navClassName = ` text-base bg-background space-x-2
-    ${
-      mobile
-        ? `transition transform -right-2/3 fixed top-0 z-20 py-4 pb-7 w-2/3 overflow-y-auto py-4 sm:hidden ${
-            mobileNavigationOpened ? "-translate-x-full shadow-2xl" : ""
-          }`
-        : "hidden sm:flex"
+    ${mobile
+      ? `transition transform -right-2/3 fixed top-0 z-20 py-4 pb-7 w-2/3 overflow-y-auto py-4 sm:hidden ${mobileNavigationOpened ? "-translate-x-full shadow-2xl" : ""
+      }`
+      : "hidden sm:flex"
     }
   `;
   const navListClassName = `
@@ -108,7 +107,7 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
             >
               {button ? (
                 <Button variant={"default"} className={` ${mobile && "mx-4"}`}>
-                  <a href={href}>{title}</a>
+                  <Link href={href}>{title}</Link>
                 </Button>
               ) : (
                 <NavLink

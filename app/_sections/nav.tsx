@@ -9,9 +9,9 @@ export function Header({ navLinks = links }: HeaderProps) {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-[#00000033] bg-background">
       <nav className="container mx-auto  flex w-full items-center justify-between bg-background px-6 py-4">
-        <Link href="/">
+        <a href="/">
           <Logo />
-        </Link>
+        </a>
         <Navigation navLinks={navLinks} />
         <Navigation mobile navLinks={navLinks} />
       </nav>
@@ -107,7 +107,7 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
             >
               {button ? (
                 <Button variant={"default"} className={` ${mobile && "mx-4"}`}>
-                  <Link href={href}>{title}</Link>
+                  <a href={href}>{title}</a>
                 </Button>
               ) : (
                 <NavLink
@@ -128,7 +128,7 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
 
 function NavLink({ children, className, mobile, href }: NavLinkProps) {
   return (
-    <Link
+    <a
       href={href}
       className={`
         block whitespace-nowrap px-2 py-2 text-base no-underline transition 
@@ -137,7 +137,7 @@ function NavLink({ children, className, mobile, href }: NavLinkProps) {
       `}
     >
       {children}
-    </Link>
+    </a>
   );
 }
 

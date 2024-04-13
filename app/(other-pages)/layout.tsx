@@ -8,15 +8,14 @@ export default function OtherLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <>
+      
         <Navbar />
         <main className="flex min-h-screen flex-col items-center justify-between pt-[80px]">
           {children}
           <GetQuote />
         </main>
         <Footer />
-      </body>
-    </html>
+    </>
   );
 }

@@ -84,3 +84,6 @@ body {
 * {
   scroll-behavior: smooth;
 }
+/* *{
+  border: 1px dashed red;
+} */

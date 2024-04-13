@@ -90,11 +90,7 @@ const socials = [
     icon: facebookIcon,
     slug: "https://www.facebook.com/movemypetnigeria",
   },
-  {
-    id: "3",
-    icon: phoneIcon,
-    slug: "https://wa.me/+2348184739642",
-  },
+  
 ];
 const footerLinks: FooterLink[] = [
   {

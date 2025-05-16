@@ -37,7 +37,7 @@ const links: NavLink[] = [
   },
   {
     title: "Get Quote",
-    href: "/contact-us",
+    href: "https://www.movemypetng.com/contact-us",
     button: true,
   },
 ];

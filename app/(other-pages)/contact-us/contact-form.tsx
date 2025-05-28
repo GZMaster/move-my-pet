@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import emailjs from "@emailjs/browser";
@@ -387,7 +386,7 @@ export function ContactForm() {
           type="submit"
           disabled={loading}
         >
-        {loading ? "Submitting..." :"Submit"}         </Button>
+          {loading ? "Submitting..." : "Submit"}         </Button>
       </form>
     </Form>
   );

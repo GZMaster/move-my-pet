@@ -4,16 +4,19 @@ import Image from "next/image";
 import { ArrowRightIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { NAV_ITEMS, type NavItem } from "@/app/config/routes";
+import { cn } from "@/lib/utils";
 
-export function Header({ navLinks = links }: HeaderProps) {
+export function Header() {
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-[#00000033] bg-background">
-      <nav className="container mx-auto  flex w-full items-center justify-between bg-background px-6 py-4">
-        <a href="/">
+      <nav className="container mx-auto flex w-full items-center justify-between bg-background px-6 py-4">
+        <Link href="/">
           <Logo />
-        </a>
-        <Navigation navLinks={navLinks} />
-        <Navigation mobile navLinks={navLinks} />
+        </Link>
+        <Navigation />
+        <Navigation mobile />
       </nav>
     </header>
   );
@@ -22,56 +25,50 @@ export function Header({ navLinks = links }: HeaderProps) {
 function Logo() {
   return <img src="/assets/logo.png" width={75} height={50} alt="logo" />;
 }
-const links: NavLink[] = [
-  {
-    title: "Our Services",
-    href: "#services",
-  },
-  {
-    title: "Locate Us",
-    href: "#locate",
-  },
-  {
-    title: "Testimonials",
-    href: "#testimonial",
-  },
-  {
-    title: "Get Quote",
-    href: "https://www.movemypetng.com/contact-us",
-    button: true,
-  },
-];
 
-function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
+function Navigation({ mobile = false }: { mobile?: boolean }) {
   const [mobileNavigationOpened, setMobileNavigationOpened] = useState(false);
+  const pathname = usePathname();
 
-  const navClassName = ` text-base bg-background space-x-2
-    ${mobile
-      ? `transition transform -right-2/3 fixed top-0 z-20 py-4 pb-7 w-2/3 overflow-y-auto py-4 sm:hidden ${mobileNavigationOpened ? "-translate-x-full shadow-2xl" : ""
-      }`
-      : "hidden sm:flex"
-    }
-  `;
-  const navListClassName = `
-    flex
-    ${mobile ? "flex-col space-y-2 w-full " : "items-center gap-12"}
-  `;
-  const navListItemClassName = `
-    group relative hover:scale-105 transform transition-transform
-    ${mobile ? "w-full overflow-x-visible text-right" : ""}
-  `;
-  const navListLinkClassName = mobile
-    ? "mx-4 text- dark:text-white rounded-[20px]"
-    : "";
+  const navClassName = cn(
+    "text-base bg-background space-x-2",
+    mobile
+      ? "transition transform -right-2/3 fixed top-0 z-20 py-4 pb-7 w-2/3 overflow-y-auto py-4 sm:hidden"
+      : "hidden sm:flex",
+    mobile && mobileNavigationOpened && "-translate-x-full shadow-2xl"
+  );
+
+  const navListClassName = cn(
+    "flex",
+    mobile ? "flex-col space-y-2 w-full" : "items-center gap-12"
+  );
+
+  const navListItemClassName = cn(
+    "group relative hover:scale-105 transform transition-transform",
+    mobile && "w-full overflow-x-visible text-right"
+  );
 
   const closeMobileNavigation = () => setMobileNavigationOpened(false);
+
+  const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('/#')) {
+      e.preventDefault();
+      const elementId = href.replace('/#', '');
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        closeMobileNavigation();
+      }
+    }
+  };
 
   return (
     <>
       {mobile && (
-        <div className="flex gap-2 md:hidden ">
+        <div className="flex gap-2 md:hidden">
           <button
-            className="block text-slate-900  dark:text-slate-50 sm:hidden"
+            type="button"
+            className="block text-slate-900 dark:text-slate-50 sm:hidden"
             onClick={() => setMobileNavigationOpened(true)}
             title="Open navigation menu"
           >
@@ -84,7 +81,14 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
         <div
           className="fixed right-0 top-0 z-10 h-full w-full opacity-70 dark:opacity-90 sm:hidden"
           onClick={closeMobileNavigation}
-        ></div>
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              closeMobileNavigation();
+            }
+          }}
+          role="button"
+          tabIndex={0}
+        />
       )}
 
       <nav className={navClassName}>
@@ -92,28 +96,35 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
           {mobile && (
             <li className="text-right">
               <button
-                className="px-6 py-2  text-slate-900 dark:text-slate-50"
+                type="button"
+                className="px-6 py-2 text-slate-900 dark:text-slate-50"
                 onClick={closeMobileNavigation}
               >
                 <ArrowRightIcon />
               </button>
             </li>
           )}
-          {navLinks.map(({ title, href, button }) => (
+          {NAV_ITEMS.map(({ title, href, button }) => (
             <li
               className={navListItemClassName}
               key={href}
               onClick={closeMobileNavigation}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  closeMobileNavigation();
+                }
+              }}
             >
               {button ? (
-                <Button variant={"default"} className={` ${mobile && "mx-4"}`}>
-                  <a href={href}>{title}</a>
+                <Button variant="default" className={cn(mobile && "mx-4")}>
+                  <Link href={href}>{title}</Link>
                 </Button>
               ) : (
                 <NavLink
-                  className={navListLinkClassName}
-                  mobile={mobile}
                   href={href}
+                  isActive={pathname === href}
+                  mobile={mobile}
+                  onClick={(e) => handleHashClick(e, href)}
                 >
                   {title}
                 </NavLink>
@@ -126,38 +137,26 @@ function Navigation({ mobile = false, navLinks = [] }: NavigationProps) {
   );
 }
 
-function NavLink({ children, className, mobile, href }: NavLinkProps) {
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  isActive: boolean;
+  mobile?: boolean;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+function NavLink({ children, href, isActive, mobile, onClick }: NavLinkProps) {
   return (
-    <a
+    <Link
       href={href}
-      className={`
-        block whitespace-nowrap px-2 py-2 text-base no-underline transition 
-        ${mobile && ""}
-        ${className}
-      `}
+      onClick={onClick}
+      className={cn(
+        "block whitespace-nowrap px-2 py-2 text-base no-underline transition",
+        isActive && "font-semibold text-primary",
+        mobile && "text-right"
+      )}
     >
       {children}
-    </a>
+    </Link>
   );
-}
-
-export interface NavLink {
-  title: string;
-  href: string;
-  children?: NavLink[];
-  button?: boolean;
-}
-
-interface NavigationProps {
-  mobile?: boolean;
-  navLinks?: NavLink[];
-}
-
-interface NavLinkProps extends React.HTMLProps<HTMLLinkElement> {
-  href: string;
-  mobile?: boolean;
-}
-
-interface HeaderProps {
-  navLinks?: NavLink[];
 }

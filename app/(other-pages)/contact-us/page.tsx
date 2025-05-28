@@ -17,10 +17,10 @@ export default function page() {
             details and provide you with a customized quote promptly.
           </p>
           <div className="flex flex-col gap-6 pt-10">
-            {contact.map((c, idx) => (
+            {contact.map((c) => (
               <Link
                 href={c.slug}
-                key={idx}
+                key={c.title}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary flex gap-4 items-center hover:underline"

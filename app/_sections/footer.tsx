@@ -42,8 +42,8 @@ export default function Footer() {
                   {column.data.leadText}
                 </h2>
                 <ul>
-                  {column.data.items.map((item, index) => (
-                    <li key={index} className="mb-4 opacity-70">
+                  {column.data.items.map((item) => (
+                    <li key={item.title} className="mb-4 opacity-70">
                       <Link
                         href={item.slug}
                         target={item.new_page ? "_blank" : "_self"}
@@ -90,7 +90,7 @@ const socials = [
     icon: facebookIcon,
     slug: "https://www.facebook.com/movemypetnigeria",
   },
-  
+
 ];
 const footerLinks: FooterLink[] = [
   {

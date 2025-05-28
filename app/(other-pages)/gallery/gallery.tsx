@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import React, { useState } from "react";
-import { IMedia } from "./page";
+import type { IMedia } from "./page";
 import ReactCountryFlag from "react-country-flag";
 import { flightIcon } from "@/components/icons";
 import { countries } from "@/lib/countryCode";
@@ -12,8 +12,8 @@ interface IProps {
   media: IMedia[];
 }
 const Gallery = ({ media }: IProps) => {
-  let initialCount = 9;
-  let totalCount = media.length;
+  const initialCount = 9;
+  const totalCount = media.length;
   const [displayedMedia, setDisplayedMedia] = useState(
     media.slice(0, initialCount)
   );
@@ -37,26 +37,27 @@ const Gallery = ({ media }: IProps) => {
   return (
     <div className="flex flex-col items-center gap-10 w-full">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-4 items-center w-full">
-        {displayedMedia.map((media, index) => (
+        {displayedMedia.map((media) => (
           <div
             className="flex flex-col gap-3 items-center max-w-[440px] max-h-[480px]"
-            key={index}
+            key={media.url}
           >
             {media.type === "image" ? (
               <img
                 src={media.url}
-                alt={`Media ${index + 1}`}
+                alt={`Media ${media.url}`}
                 className="w-full h-[400px]"
               />
             ) : (
-              <video controls className="h-[400px]">
+              <video controls className="h-[400px]" aria-label={`Media ${media.url}`}>
                 <source src={media.url} type="video/mp4" />
+                <track kind="captions" src="" label="English" default />
                 Your browser does not support the video tag.
               </video>
             )}
             <div className="flex gap-4 items-center">
               {media.countries.map((code, idx) => (
-                <React.Fragment key={idx}>
+                <React.Fragment key={code}>
                   <div className="flex gap-1 items-center ">
                     <ReactCountryFlag countryCode={code} />
                     <span className="font-bold">{getCountryName(code)}</span>
@@ -81,7 +82,7 @@ const Gallery = ({ media }: IProps) => {
           variant={"outline"}
           className="border-green-500 font-bold border-2 flex items-center  text-green-500 gap-4 hover:text-green-500/80 hover:bg-green-100"
           size={"lg"}
-          disabled={displayedMedia.length == totalCount}
+          disabled={displayedMedia.length === totalCount}
         >
           Load More <ArrowDownIcon />
         </Button>

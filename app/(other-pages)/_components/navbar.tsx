@@ -1,13 +1,14 @@
-import { Header, NavLink } from "@/app/_sections/nav";
+import { Header } from "@/app/_sections/nav";
+import type { NavItem } from "@/app/config/routes";
 
 export default function Navbar() {
   return (
     <>
-      <Header navLinks={links} />
+      <Header />
     </>
   );
 }
-const links: NavLink[] = [
+const links: NavItem[] = [
   {
     title: "Home",
     href: "/",
